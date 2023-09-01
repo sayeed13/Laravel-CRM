@@ -263,7 +263,7 @@ class APIController extends Controller
             $agent = $request->user()->id;
             $leads = Lead::where('lead_agent_id', $agent)
                         ->select(['id', 'phone', 'username', 'ftd', 'amount', 'status', 'country', 'source', 'created_at', 'updated_at'])
-                        ->orderBy('status', 'asc');
+                        ->latest();
         
             return DataTables::of($leads)
             ->addIndexColumn()

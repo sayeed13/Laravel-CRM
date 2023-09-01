@@ -19,7 +19,7 @@
     @if ($hasFollowUpLeads > 0)
         <div class="alert alert-danger d-flex align-items-center justify-content-center p-4">
             <i class="las la-exclamation-triangle h1 mr-2"></i>
-            <h1 class="h2">Your Team has {{$hasFollowUpLeads}} leads with a "follow up" status. Please review them.</h1>
+            <h1 class="h2">Your Team has {{$hasFollowUpLeads}} "follow up" leads, Please review.</h1>
         </div>
     @endif
 
