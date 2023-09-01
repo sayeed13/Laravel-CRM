@@ -65,7 +65,16 @@ class LeadController extends Controller
     }
 
     public function LeadsForTeamLeader(){
-        return view('lead.lead-list-tleader');
+        // checking follow up leads for Team Leader panel
+        $user = Auth::user();
+        $userRole = 'team_leader';
+        if ($user && $user->hasRole($userRole)) {
+            $team_id = $user->team_id;
+        }
+        $hasFollowUpLeads = Lead::where('team_id', $team_id)
+                                ->where('status', 1)
+                                ->count();
+        return view('lead.lead-list-tleader', compact('hasFollowUpLeads'));
     }
 
     public function LeadsForAgent(){
