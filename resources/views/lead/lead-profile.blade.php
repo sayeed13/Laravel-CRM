@@ -225,8 +225,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Created:</td>
-                                    <td class="text-right">{{$lead->created_at->diffForHumans()}}</td>
+                                    <td>Updated:</td>
+                                    <td class="text-right">{{$lead->updated_at->diffForHumans()}}</td>
                                 </tr>
                             </tbody>
                         </table>

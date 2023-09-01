@@ -8,11 +8,12 @@ use App\Models\Note;
 use App\Models\Team;
 use App\Models\User;
 use App\Exports\LeadsExport;
-use App\Exports\LeadsExportForTeamLeader;
 use App\Imports\LeadsImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LeadsExportForTeamLeader;
 use App\Notifications\LeadAssignedNotification;
 
 class LeadController extends Controller
@@ -68,7 +69,18 @@ class LeadController extends Controller
     }
 
     public function LeadsForAgent(){
-        return view('lead.lead-list-agent');
+
+        // checking follow up leads for agent panel
+        $user = Auth::user();
+        $userRole = 'agent';
+        if ($user && $user->hasRole($userRole)) {
+            $user_id = $user->id;
+        }
+        $hasFollowUpLeads = Lead::where('lead_agent_id', $user_id)
+                                ->where('status', 1)
+                                ->count();
+
+        return view('lead.lead-list-agent', compact('hasFollowUpLeads'));
     }
 
     public function show($id){
@@ -315,6 +327,7 @@ class LeadController extends Controller
             return redirect()->back()->with('error', 'Failed to transfer leads.');
         }
     }
+
     
 
 }

@@ -204,8 +204,8 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => '/Users/prabhas/wolf/storage/framework/cache/data',
-        'lock_path' => '/Users/prabhas/wolf/storage/framework/cache/data',
+        'path' => '/Users/prabhas/wolf/Laravel-CRM/storage/framework/cache/data',
+        'lock_path' => '/Users/prabhas/wolf/Laravel-CRM/storage/framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -438,7 +438,7 @@
     array (
       'enabled' => true,
       'driver' => 'file',
-      'path' => '/Users/prabhas/wolf/storage/debugbar',
+      'path' => '/Users/prabhas/wolf/Laravel-CRM/storage/debugbar',
       'connection' => NULL,
       'provider' => '',
       'hostname' => '127.0.0.1',
@@ -642,7 +642,7 @@
     ),
     'temporary_files' => 
     array (
-      'local_path' => '/Users/prabhas/wolf/storage/framework/cache/laravel-excel',
+      'local_path' => '/Users/prabhas/wolf/Laravel-CRM/storage/framework/cache/laravel-excel',
       'remote_disk' => NULL,
       'remote_prefix' => NULL,
       'force_resync_remote' => NULL,
@@ -656,13 +656,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => '/Users/prabhas/wolf/storage/app',
+        'root' => '/Users/prabhas/wolf/Laravel-CRM/storage/app',
         'throw' => false,
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => '/Users/prabhas/wolf/storage/app/public',
+        'root' => '/Users/prabhas/wolf/Laravel-CRM/storage/app/public',
         'url' => 'http://localhost:8000/storage',
         'visibility' => 'public',
         'throw' => false,
@@ -682,7 +682,7 @@
     ),
     'links' => 
     array (
-      '/Users/prabhas/wolf/public/storage' => '/Users/prabhas/wolf/storage/app/public',
+      '/Users/prabhas/wolf/Laravel-CRM/public/storage' => '/Users/prabhas/wolf/Laravel-CRM/storage/app/public',
     ),
   ),
   'hashing' => 
@@ -721,14 +721,14 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => '/Users/prabhas/wolf/storage/logs/laravel.log',
+        'path' => '/Users/prabhas/wolf/Laravel-CRM/storage/logs/laravel.log',
         'level' => 'debug',
         'replace_placeholders' => true,
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => '/Users/prabhas/wolf/storage/logs/laravel.log',
+        'path' => '/Users/prabhas/wolf/Laravel-CRM/storage/logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
         'replace_placeholders' => true,
@@ -793,7 +793,7 @@
       ),
       'emergency' => 
       array (
-        'path' => '/Users/prabhas/wolf/storage/logs/laravel.log',
+        'path' => '/Users/prabhas/wolf/Laravel-CRM/storage/logs/laravel.log',
       ),
     ),
   ),
@@ -860,7 +860,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => '/Users/prabhas/wolf/resources/views/vendor/mail',
+        0 => '/Users/prabhas/wolf/Laravel-CRM/resources/views/vendor/mail',
       ),
     ),
   ),
@@ -1009,7 +1009,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => '/Users/prabhas/wolf/storage/framework/sessions',
+    'files' => '/Users/prabhas/wolf/Laravel-CRM/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -1029,9 +1029,9 @@
   array (
     'paths' => 
     array (
-      0 => '/Users/prabhas/wolf/resources/views',
+      0 => '/Users/prabhas/wolf/Laravel-CRM/resources/views',
     ),
-    'compiled' => '/Users/prabhas/wolf/storage/framework/views',
+    'compiled' => '/Users/prabhas/wolf/Laravel-CRM/storage/framework/views',
   ),
   'flare' => 
   array (
@@ -1107,7 +1107,7 @@
     array (
     ),
     'enable_runnable_solutions' => NULL,
-    'remote_sites_path' => '/Users/prabhas/wolf',
+    'remote_sites_path' => '/Users/prabhas/wolf/Laravel-CRM',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',
