@@ -72,7 +72,7 @@ class LeadController extends Controller
             $team_id = $user->team_id;
         }
         $hasFollowUpLeads = Lead::where('team_id', $team_id)
-                                ->where('status', 1)
+                                ->where('status', 18)
                                 ->count();
         return view('lead.lead-list-tleader', compact('hasFollowUpLeads'));
     }
@@ -86,7 +86,7 @@ class LeadController extends Controller
             $user_id = $user->id;
         }
         $hasFollowUpLeads = Lead::where('lead_agent_id', $user_id)
-                                ->where('status', 1)
+                                ->where('status', 18)
                                 ->count();
 
         return view('lead.lead-list-agent', compact('hasFollowUpLeads'));

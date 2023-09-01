@@ -69,8 +69,8 @@
                                         <label class="col-form-label">Status</label>
                                         <select name="status" class="select" id="status-select">
                                             <option value="" disabled selected>Select Status</option>
-                                            <option value="0" {{ $lead->status == 5 ? 'selected' : '' }}>New</option>
-                                            <option value="0" {{ $lead->status == 0 ? 'selected' : '' }}>Follow up</option>
+                                            <option value="5" {{ $lead->status == 5 ? 'selected' : '' }}>New</option>
+                                            <option value="18" {{ $lead->status == 18 ? 'selected' : '' }}>Follow up</option>
                                             <option value="1" {{ $lead->status == 1 ? 'selected' : '' }}>Interested</option>
                                             <option value="2" {{ $lead->status == 2 ? 'selected' : '' }}>Not Interested</option>
                                             <option value="3" {{ $lead->status == 3 ? 'selected' : '' }}>Existing Customer</option>

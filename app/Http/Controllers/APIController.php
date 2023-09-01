@@ -330,7 +330,6 @@ class APIController extends Controller
                     $instance->where('ftd', $request->get('ftd'));
                 }
                 if($request->get('status')){
-                    dd($request->get('status'));
                     $instance->where('status', $request->get('status'));
                 }
                 if(!empty($request->get('source'))) {
