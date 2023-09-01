@@ -42,7 +42,7 @@ class APIController extends Controller
                 }
             })
             ->addColumn('status', function(Lead $lead){
-                if($lead->status == 0){
+                if($lead->status == 18){
                     return '<span class="badge bg-inverse-primary">Follow Up</span>';
                 }elseif($lead->status == 1){
                     return '<span class="badge bg-inverse-primary">Interested</span>';
@@ -169,7 +169,7 @@ class APIController extends Controller
                 }
             })
             ->addColumn('status', function(Lead $lead){
-                if($lead->status == 0){
+                if($lead->status == 18){
                     return '<span class="badge bg-inverse-primary">Follow Up</span>';
                 }elseif($lead->status == 1){
                     return '<span class="badge bg-inverse-primary">Interested</span>';
@@ -262,7 +262,7 @@ class APIController extends Controller
         if (Auth::check()) {
             $agent = $request->user()->id;
             $leads = Lead::where('lead_agent_id', $agent)
-                        ->select(['id', 'phone', 'username', 'ftd', 'amount', 'status', 'country', 'source', 'created_at'])
+                        ->select(['id', 'phone', 'username', 'ftd', 'amount', 'status', 'country', 'source', 'created_at', 'updated_at'])
                         ->orderBy('status', 'asc');
         
             return DataTables::of($leads)
@@ -279,7 +279,7 @@ class APIController extends Controller
                 }
             })
             ->addColumn('status', function(Lead $lead){
-                if($lead->status == 0){
+                if($lead->status == 18){
                     return '<span class="badge bg-inverse-primary">Follow Up</span>';
                 }elseif($lead->status == 1){
                     return '<span class="badge bg-inverse-primary">Interested</span>';
@@ -328,6 +328,10 @@ class APIController extends Controller
             ->filter(function($instance) use ($request){
                 if($request->get('ftd') == '0' || $request->get('ftd') == '1'){
                     $instance->where('ftd', $request->get('ftd'));
+                }
+                if($request->get('status')){
+                    dd($request->get('status'));
+                    $instance->where('status', $request->get('status'));
                 }
                 if(!empty($request->get('source'))) {
                     $source = $request->get('source');

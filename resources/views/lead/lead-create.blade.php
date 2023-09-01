@@ -76,7 +76,7 @@
                         <select name="status" class="select" id="status-select">
                             <option value="" disabled selected>Select Status</option>
                             <option value="5">New</option>
-                            <option value="0">Follow up</option>
+                            <option value="18">Follow up</option>
                             <option value="1">Interested</option>
                             <option value="2">Not Interested</option>
                             <option value="3">Existing Customer</option>

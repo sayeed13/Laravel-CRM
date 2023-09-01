@@ -26,7 +26,7 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <label for="ftd">FTD:</label>
                         <select id='ftd' name="ftd" class="form-control">
@@ -36,7 +36,33 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select id='status' name="status" class="form-control">
+                            <option selected disabled value="">Select Status</option>
+                            <option value="18">Follow up</option>
+                            <option value="1">Interested</option>
+                            <option value="2">Not Interested</option>
+                            <option value="3">Existing Customer</option>
+                            <option value="4">Invalid Number</option>
+                            <option value="5">New</option>
+                            <option value="6">Switch Off</option>
+                            <option value="7">Call Busy</option>
+                            <option value="8">Message Sent</option>
+                            <option value="9">No Response</option>
+                            <option value="10">Id Created</option>
+                            <option value="11">Sent Demo Id</option>
+                            <option value="12">Call After Sometimes</option>
+                            <option value="13">Waiting Response</option>
+                            <option value="14">Play Later</option>
+                            <option value="15">No Payment Option</option>
+                            <option value="16">Blocked My Number</option>
+                            <option value="17">Declined</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
                     <div class="form-group">
                         <label for="source">Search By Source</label>
                         <input type="text" name="source" id="source" class="form-control"/>
@@ -97,6 +123,7 @@
                 url: "{{ route('api.leads-agent.index') }}",
                 data: function (d) {
                         d.ftd = $('#ftd').val(),
+                        d.status = $('#status').val(),
                         d.source = $('#source').val(),
                         d.phone = $('#phone').val(),
                         d.username = $('#username').val()
@@ -123,6 +150,9 @@
 
     $('#ftd').change(function(){
         table.draw();
+    });
+    $('#status').change(function(){
+            table.draw();
     });
     $('#source').keyup(function(){
         table.draw();

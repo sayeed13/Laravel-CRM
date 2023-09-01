@@ -27,7 +27,7 @@ class LeadsExportForTeamLeader implements FromCollection, WithMapping, WithHeadi
         $ftdValue = $lead->ftd == 1 ? 'Yes' : 'No';
 
         $statusLabels = [
-            0 => 'Follow Up',
+            18 => 'Follow Up',
             1 => 'Interested',
             2 => 'Not Interested',
             3 => 'Existing Customer',

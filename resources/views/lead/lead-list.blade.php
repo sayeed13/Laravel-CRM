@@ -46,7 +46,7 @@
                         <label for="status">Status:</label>
                         <select id='status' name="status" class="form-control">
                             <option selected disabled value="">Select Status</option>
-                            <option value="0">Follow up</option>
+                            <option value="18">Follow up</option>
                             <option value="1">Interested</option>
                             <option value="2">Not Interested</option>
                             <option value="3">Existing Customer</option>

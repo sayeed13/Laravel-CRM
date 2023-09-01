@@ -185,7 +185,7 @@
                                 <tr>
                                     <td>Status:</td>
                                     <td class="text-right">
-                                        @if($lead->status == 0)
+                                        @if($lead->status == 18)
                                             <span class="badge badge-primary">Follow Up</span>
                                         @elseif($lead->status == 1)
                                             <span class="badge badge-primary">Interested</span>
