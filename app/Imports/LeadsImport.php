@@ -36,7 +36,7 @@ class LeadsImport implements ToCollection
             // Create a new lead and assign the phone number
             $lead = new Lead();
             $lead->phone = $phoneNumber;
-            $lead->status = 6;
+            $lead->status = 5;
             $lead->save();
 
             $this->leads[] = $lead;
