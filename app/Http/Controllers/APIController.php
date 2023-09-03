@@ -31,6 +31,9 @@ class APIController extends Controller
             ->addColumn('team_id', function(Lead $lead){
                 return $lead->team->team_name;
             })
+            ->addColumn('source', function(Lead $lead){
+                return strtoupper($lead->source);
+            })
             ->addColumn('lead_agent_id', function(Lead $lead){
                 return ucfirst($lead->agent->name);
             })
@@ -161,6 +164,9 @@ class APIController extends Controller
             ->addColumn('lead_agent_id', function(Lead $lead){
                 return ucfirst($lead->agent->name);
             })
+            ->addColumn('source', function(Lead $lead){
+                return strtoupper($lead->source);
+            })
             ->addColumn('ftd', function(Lead $lead){
                 if($lead->ftd == 1){
                     return '<span class="badge badge-pill badge-success">Yes</span>';
@@ -270,6 +276,9 @@ class APIController extends Controller
             ->addColumn('action', function($row){
                 $actionBtn = '<a href="/leads/'.$row["id"].'" class="edit btn btn-success btn-sm">Open</a>';
                 return $actionBtn;
+            })
+            ->addColumn('source', function(Lead $lead){
+                return strtoupper($lead->source);
             })
             ->addColumn('ftd', function(Lead $lead){
                 if($lead->ftd == 1){

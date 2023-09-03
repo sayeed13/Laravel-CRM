@@ -43,7 +43,7 @@ class Lead extends Model
     // Define a mutator to convert the source to lowercase before saving to the database
     public function setSourceAttribute($value)
     {
-        $this->attributes['source'] = strtolower($value);
+        $this->attributes['source'] = strtoupper($value);
     }
 
     // Define an accessor to return the source in lowercase when retrieved from the database
