@@ -151,11 +151,12 @@ class LeadController extends Controller
             'phone' => 'required|regex:/^([0-9\+]*)$/|unique:leads|min:10|max:14',
         ]);
 
-        $usernameCheck = Lead::where('username', $request->username)->first();
-        if ($usernameCheck) {
-            return back()->with('error', 'Username is already exist!');
+        if ($request->username) {
+            $usernameCheck = Lead::where('username', $request->username)->first();
+            if ($usernameCheck) {
+                return back()->with('error', 'Username is already exist!');
+            }
         }
-        
 
         $lead = new Lead();
         $lead->phone = $request->phone;
