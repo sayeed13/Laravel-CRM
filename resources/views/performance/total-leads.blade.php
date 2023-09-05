@@ -143,7 +143,7 @@
                     <ul class="list-group list-group-flush">
                         @foreach ($sources as $index => $data)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{strtouppr($data->source)}}
+                                {{ strtoupper($data->source) }}
                                 <span class="badge badge-primary badge-pill">{{$data->count}}</span>
                             </li>
                         @endforeach

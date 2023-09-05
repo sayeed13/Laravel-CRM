@@ -2,12 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\NotesExport;
 use App\Models\Lead;
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class NoteController extends Controller
 {
+    /**
+     * Export filterable Notes
+     */
+    public function exportNotes(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        return Excel::download(new NotesExport($startDate, $endDate), 'notes_export.xlsx');
+    }
+
+
     /**
      * Display a listing of the resource.
      */

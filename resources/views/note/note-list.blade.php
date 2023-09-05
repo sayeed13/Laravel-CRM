@@ -1,4 +1,29 @@
 <x-admin-layout>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ route('notes.export') }}" method="get">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="start_date">Start Date:</label>
+                                <input class="w-full" type="date" name="start_date" required><br>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="end_date">End Date:</label>
+                                <input class="w-full" type="date" name="end_date" required><br>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button style="background-color: #f43b48;" class="btn btn-primary submit-btn" type="submit">Export Data</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">

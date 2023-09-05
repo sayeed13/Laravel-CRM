@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Lead;
 use App\Models\Note;
 use App\Models\Team;
@@ -18,7 +17,6 @@ use App\Notifications\LeadAssignedNotification;
 
 class LeadController extends Controller
 {
-    //
     // Lead Count
     public function GenerateTotalReport(Request $request)
     {
@@ -28,7 +26,7 @@ class LeadController extends Controller
         $totalSignup = Lead::whereBetween('created_at', [$startDate, $endDate])->whereNotNull('username')->count();;
         $totalFtd = Lead::whereBetween('created_at', [$startDate, $endDate])->where('ftd', 2)->count();
         $totalAmount = Lead::whereBetween('created_at', [$startDate, $endDate])->sum('amount');
-        
+
         return view('lead.lead-report-count', [
             'totalLeads' => $totalLeads,
             'totalSignup' => $totalSignup,
@@ -38,33 +36,37 @@ class LeadController extends Controller
     }
 
     // All Lead Export
-    public function export() {
-        
-        if(auth()->user()->role === 'admin' or auth()->user()->role === 'manager' or auth()->user()->role === 'support_team_leader' ){
+    public function export()
+    {
+
+        if (auth()->user()->role === 'admin' or auth()->user()->role === 'manager' or auth()->user()->role === 'support_team_leader') {
             return Excel::download(new LeadsExport(), 'leads.xlsx');
-        }else{
+        } else {
             return 'you are not authorized!';
         }
     }
 
     // Lead Export For Team Leader
-    public function exportDataTL(){
-        if(auth()->user()->role === 'team_leader' or auth()->user()->role === 'admin' ){
+    public function exportDataTL()
+    {
+        if (auth()->user()->role === 'team_leader' or auth()->user()->role === 'admin') {
             return Excel::download(new LeadsExportForTeamLeader(), 'leads.xlsx');
-        }else{
+        } else {
             return 'you are not authorized!';
         }
     }
 
 
-    public function index(){
+    public function index()
+    {
         $teams = Team::select('id', 'team_name')->get();
         return view('lead.lead-list', [
             'teams' => $teams,
         ]);
     }
 
-    public function LeadsForTeamLeader(){
+    public function LeadsForTeamLeader()
+    {
         // checking follow up leads for Team Leader panel
         $user = Auth::user();
         $userRole = 'team_leader';
@@ -72,12 +74,13 @@ class LeadController extends Controller
             $team_id = $user->team_id;
         }
         $hasFollowUpLeads = Lead::where('team_id', $team_id)
-                                ->where('status', 18)
-                                ->count();
+            ->where('status', 18)
+            ->count();
         return view('lead.lead-list-tleader', compact('hasFollowUpLeads'));
     }
 
-    public function LeadsForAgent(){
+    public function LeadsForAgent()
+    {
 
         // checking follow up leads for agent panel
         $user = Auth::user();
@@ -86,13 +89,14 @@ class LeadController extends Controller
             $user_id = $user->id;
         }
         $hasFollowUpLeads = Lead::where('lead_agent_id', $user_id)
-                                ->where('status', 18)
-                                ->count();
+            ->where('status', 18)
+            ->count();
 
         return view('lead.lead-list-agent', compact('hasFollowUpLeads'));
     }
 
-    public function show($id){
+    public function show($id)
+    {
 
         $lead = Lead::findOrFail($id);
         $teams = Team::select('id')->get();
@@ -121,7 +125,8 @@ class LeadController extends Controller
         return back();
     }
 
-    public function create(){
+    public function create()
+    {
         $teams = Team::all();
         $agent = null; // Initialize the $agent variable if needed
 
@@ -156,7 +161,7 @@ class LeadController extends Controller
         if (auth()->user()->role === 'agent') {
             $agentid = auth()->user();
             $lead->team_id = $agentid->team_id;
-        }else {
+        } else {
             $lead->team_id = $request->team_id;
         }
         $lead->lead_agent_id = $request->lead_agent_id; //lead assinged User
@@ -171,14 +176,17 @@ class LeadController extends Controller
         return back()->with('success', 'Lead Added Successfully!');
     }
 
-    public function update(Request $request, $id){
-        
+    public function update(Request $request, $id)
+    {
+
         $lead = Lead::find($id);
-        if (auth()->user()->role === 'admin'
+        if (
+            auth()->user()->role === 'admin'
             or auth()->user()->role === 'manager'
             or auth()->user()->role === 'team_leader'
             or auth()->user()->role === 'support_team_leader'
-            or auth()->user()->id === $lead->lead_agent_id) {
+            or auth()->user()->id === $lead->lead_agent_id
+        ) {
 
             $lead->username = $request->username;
             $lead->status = $request->status;
@@ -186,7 +194,7 @@ class LeadController extends Controller
             if (auth()->user()->role === 'agent') {
                 $agentid = auth()->user();
                 $lead->lead_agent_id = $agentid->id;
-            }else {
+            } else {
                 $lead->lead_agent_id = $request->lead_agent_id;
             }
             $lead->ftd = $request->ftd;
@@ -195,10 +203,10 @@ class LeadController extends Controller
         } else {
             return back()->with('error', 'You are not authorized to update.');
         }
-        
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $lead = Lead::findOrFail($id);
         $lead->delete();
 
@@ -214,7 +222,8 @@ class LeadController extends Controller
     }
 
 
-    public function leadImportPage(){
+    public function leadImportPage()
+    {
         $teams = Team::all();
         return view('lead.lead-import', [
             'teams' => $teams,
@@ -230,9 +239,11 @@ class LeadController extends Controller
 
     public function leadImportAndDistribute(Request $request)
     {
-        if(auth()->user()->role === 'admin'
+        if (
+            auth()->user()->role === 'admin'
             or auth()->user()->role === 'manager'
-            or auth()->user()->role === 'support_team_leader' ){
+            or auth()->user()->role === 'support_team_leader'
+        ) {
 
             DB::transaction(function () use ($request) {
                 $file = $request->file('file');
@@ -246,7 +257,7 @@ class LeadController extends Controller
 
                 $importedLeads = $import->getLeads();
 
-                
+
 
                 // Get selected agent IDs for lead distribution
                 $selectedAgents = $request->input('selected_agents', []);
@@ -260,7 +271,7 @@ class LeadController extends Controller
                     })
                     ->orderBy('leads_count')
                     ->get();
-                
+
                 //dd($agents->toArray());
 
                 // Calculate the distribution
@@ -275,8 +286,6 @@ class LeadController extends Controller
                 foreach ($importedLeads as $leadData) {
                     $lead = Lead::where('phone', $leadData->phone)->first();
 
-                    dd($lead);
-
                     if ($lead) {
                         $agent = $agents[$agentIndex];
                         $lead->lead_agent_id = $agent->id;
@@ -288,15 +297,15 @@ class LeadController extends Controller
                         $agentIndex = ($agentIndex + 1) % $agentsCount;
                     }
                 }
-
             });
             return redirect()->back()->with('success', 'Leads Imported successfully!');
-        }else {
+        } else {
             return redirect()->back()->with('error', 'You Are not Authorized!');
         }
     }
 
-    public function leadsTransferPage() {
+    public function leadsTransferPage()
+    {
         $teams = Team::all();
 
         return view('lead.lead-transfer', [
@@ -336,7 +345,4 @@ class LeadController extends Controller
             return redirect()->back()->with('error', 'Failed to transfer leads.');
         }
     }
-
-    
-
 }
