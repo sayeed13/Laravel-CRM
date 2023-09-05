@@ -264,8 +264,6 @@ class LeadController extends Controller
 
                 $importedLeads = $import->getLeads();
 
-
-
                 // Get selected agent IDs for lead distribution
                 $selectedAgents = $request->input('selected_agents', []);
 

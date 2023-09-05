@@ -28,7 +28,9 @@ class LeadsImport implements ToCollection
             $phoneNumber = '+' . $row[0]; // Assuming the phone number is in the first column of each row
             $username = $row[1];
 
-            $existNumber = Lead::where('phone', $phoneNumber)->first();
+            $existNumber = Lead::where('phone', $phoneNumber)
+                                ->orWhere('username', $username)
+                                ->first();
 
             if ($existNumber) {
                 continue;
