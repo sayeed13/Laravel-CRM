@@ -14,20 +14,21 @@
     </x-slot>
 
     <div class="card">
+
         <div class="card-body text-center">
             <form action="{{ route('leads.report.count')}}" method="GET">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="from_date">From Date:</label>
-                            <input type="date" name="from_date" id="from_date" class="form-control" />
+                            <label for="from_datetime">From Date and Time:</label>
+                            <input type="datetime-local" name="from_datetime" id="from_datetime" class="form-control" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="to_date">To Date:</label>
-                            <input type="date" name="to_date" id="to_date" class="form-control" />
+                            <label for="to_datetime">To Date and Time:</label>
+                            <input type="datetime-local" name="to_datetime" id="to_datetime" class="form-control" />
                         </div>
                     </div>
                 </div>

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\LeadsExportForTeamLeader;
+use Illuminate\Support\Facades\Validator;
 use App\Notifications\LeadAssignedNotification;
 
 class LeadController extends Controller
@@ -20,8 +21,10 @@ class LeadController extends Controller
     // Lead Count
     public function GenerateTotalReport(Request $request)
     {
-        $startDate = $request->input('from_date');
-        $endDate = $request->input('to_date');
+        
+        $startDate = $request->input('from_datetime');
+        $endDate = $request->input('to_datetime');
+
         $totalLeads = Lead::whereBetween('created_at', [$startDate, $endDate])->count();
         $totalSignup = Lead::whereBetween('created_at', [$startDate, $endDate])->whereNotNull('username')->count();;
         $totalFtd = Lead::whereBetween('created_at', [$startDate, $endDate])->where('ftd', 2)->count();
