@@ -26,11 +26,15 @@ class LeadsImport implements ToCollection
 
         foreach ($rows as $row) {
             $phoneNumber = '+' . $row[0]; // Assuming the phone number is in the first column of each row
-            $username = $row[1];
-
-            $existNumber = Lead::where('phone', $phoneNumber)
-                                ->orWhere('username', $username)
-                                ->first();
+            if (isset($row[1])) {
+                $username = $row[1];
+                $existNumber = Lead::where('phone', $phoneNumber)
+                    ->orWhere('username', $username)
+                    ->first();
+            } else {
+                $existNumber = Lead::where('phone', $phoneNumber)
+                    ->first();
+            }
 
             if ($existNumber) {
                 continue;
@@ -39,13 +43,13 @@ class LeadsImport implements ToCollection
             // Create a new lead and assign the phone number
             $lead = new Lead();
             $lead->phone = $phoneNumber;
-            $lead->username = $username;
+            if (isset($row[1])) {
+                $lead->username = $username;
+            }
             $lead->status = 5;
             $lead->save();
 
             $this->leads[] = $lead;
-            
-            
         }
         
         
