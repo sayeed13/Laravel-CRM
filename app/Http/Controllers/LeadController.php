@@ -18,25 +18,40 @@ use App\Notifications\LeadAssignedNotification;
 
 class LeadController extends Controller
 {
-    // Lead Count
+    // Lead reoort
+
     public function GenerateTotalReport(Request $request)
     {
-        
         $startDate = $request->input('from_datetime');
         $endDate = $request->input('to_datetime');
+        $source = $request->source;
+        $team_id = $request->team_id;
 
-        $totalLeads = Lead::whereBetween('created_at', [$startDate, $endDate])->count();
-        $totalSignup = Lead::whereBetween('created_at', [$startDate, $endDate])->whereNotNull('username')->count();;
-        $totalFtd = Lead::whereBetween('created_at', [$startDate, $endDate])->where('ftd', 2)->count();
-        $totalAmount = Lead::whereBetween('created_at', [$startDate, $endDate])->sum('amount');
+        $query = Lead::whereBetween('created_at', [$startDate, $endDate]);
+
+        if ($source) {
+            $query->where('source', $source);
+        }
+        if ($team_id) {
+            $query->where('team_id', $team_id);
+        }
+
+        $totalLeads = $query->count();
+        $totalSignup = $query->whereNotNull('username')->count();
+        $totalFtd = $query->where('ftd', 2)->count();
+        $totalAmount = $query->sum('amount');
+
+        $teams = Team::select('id', 'team_name')->get();
 
         return view('lead.lead-report-count', [
             'totalLeads' => $totalLeads,
             'totalSignup' => $totalSignup,
             'totalFtd' => $totalFtd,
             'totalAmount' => $totalAmount,
+            'teams' => $teams
         ]);
     }
+
 
     // All Lead Export
     public function export()

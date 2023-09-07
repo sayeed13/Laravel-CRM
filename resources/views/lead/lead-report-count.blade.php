@@ -31,6 +31,23 @@
                             <input type="datetime-local" name="to_datetime" id="to_datetime" class="form-control" />
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="source">Source:</label>
+                            <input type="text" name="source" id="source" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-form-label">Team</label>
+                            <select name="team_id" id="team_id" class="team-select select form-control">
+                                <option selected disabled value="">Select Team</option>
+                                @foreach ($teams as $team)
+                                    <option value="{{ $team->id }}">{{ $team->team_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
