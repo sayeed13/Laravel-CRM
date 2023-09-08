@@ -38,7 +38,6 @@
 		<!-- Chart CSS -->
 		<link rel="stylesheet" href="{{ URL::asset('assets/plugins/morris/morris.css') }}">
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
         
         @yield('styles')
 		
@@ -161,13 +160,6 @@
 		<script src="{{ URL::asset('assets/plugins/raphael/raphael.min.js') }}"></script>
         <script src="{{ URL::asset('assets/plugins/morris/morris.min.js') }}"></script>
 		<script src="{{ URL::asset('assets/js/chart.js') }}"></script>
-        <script src="//cdn.jsdelivr.net/spinjs/1.3.0/spin.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
-        
-        
-        {{-- pusher.js --}}
-        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-        
         
 		@yield('script')
 		<!-- Custom JS -->

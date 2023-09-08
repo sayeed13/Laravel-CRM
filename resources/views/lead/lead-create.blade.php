@@ -183,22 +183,7 @@
     </div>
     </div>
 
-    <style>
-        .intl-tel-input,
-        .iti{
-        width: 100%;
-        }
-    </style>
 
-    <script>
-    var input = document.querySelector("#mobile_code");
-    window.intlTelInput(input, {
-        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
-        initialCountry: "in",
-        separateDialCode: true,
-
-    });
-    </script>
 
 </x-admin-layout>
 <script>
